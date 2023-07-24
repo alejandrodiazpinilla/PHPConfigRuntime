@@ -1,6 +1,6 @@
 <?php
 
-namespace Grupoaltum\PhpConfigRuntime\Traits;
+namespace Rmunate\PhpConfigRuntime\Traits;
 
 trait Utilities
 {

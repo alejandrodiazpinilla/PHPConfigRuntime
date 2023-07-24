@@ -1,66 +1,110 @@
-# Detección de Agente | Descubre y Analiza la Información del Agente de Conexión
+# PhpRunTime: ¡Ajusta tu configuración de PHP sobre la marcha!
+La libreria `PhpRunTime` proporciona métodos para gestionar la configuración de PHP en tiempo de ejecución. Permite establecer, obtener y restaurar opciones de configuración, así como verificar su existencia y estado.
 
-La librería `Detección de Agente` ofrece una amplia variedad de métodos que te permitirán conocer y analizar los datos del agente de conexión en tu aplicación.
+![RUNTIME_PHP](https://github.com/rmunate/PHPInfoServer/assets/91748598/873f40e0-9278-4a82-a50c-5baef7b7691a)
 
-![LOGO](https://github.com/rmunate/PHPInfoServer/assets/91748598/f1ee8001-aa76-49c3-82ad-49014b28fd61)
-
-## Tabla de Contenido
+### Tabla de Contenido
 1. [Métodos Disponibles](#métodos-disponibles)
-2. [Uso](#uso)
-3. [Creador](#creador)
-4. [Licencia](#licencia)
+2. [Ejemplos de Uso](#ejemplos-de-uso)
+   - [Establecer una Opción de Configuración](#establecer-una-opción-de-configuración)
+   - [Obtener el Valor de una Opción de Configuración](#obtener-el-valor-de-una-opción-de-configuración)
+   - [Restaurar una Opción de Configuración](#restaurar-una-opción-de-configuración)
+   - [Restaurar Todas las Opciones de Configuración](#restaurar-todas-las-opciones-de-configuración)
+3. [Aclaraciones](#aclaraciones)
+4. [Creador](#creador)
+5. [Licencia](#licencia)
 
-## Introducción
-Esta sencilla librería te permite obtener detalles específicos del agente de conexión, lo que te permitirá mejorar la experiencia del usuario en función de los datos de la conexión. Por ejemplo, si detectas que es una conexión móvil, puedes invitar al usuario a descargar la aplicación móvil si tu sistema cuenta con ella. Asimismo, puedes ofrecer una experiencia más personalizada para los usuarios de Android o diferenciar opciones, menús y otros elementos para usuarios de escritorio o dispositivos móviles.
 
-En resumen, tienes un sinfín de posibilidades a tu disposición.
-
-## Métodos Disponibles
+### Métodos Disponibles
 
 | Método | Descripción |
-| ------ | ----------- |
-| `Agent::get()` | Retorna el agente de conexión actual, detectado por el servidor. |
-| `Agent::detect()->isMobile()` | Valida si el agente proviene de un dispositivo móvil. |
-| `Agent::detect()->isDesktop()` | Retorna `true` si el usuario está accediendo desde un dispositivo de escritorio. |
-| `Agent::detect()->isIPhone()` | Retorna `true` si el agente del usuario corresponde a un iPhone. |
-| `Agent::detect()->isMacintosh()` | Retorna `true` si el agente del usuario corresponde a un sistema operativo Macintosh. |
-| `Agent::detect()->isLinux()` | Retorna `true` si el agente del usuario corresponde a un sistema operativo Linux (PC o sistemas Android). |
-| `Agent::detect()->isWindows()` | Retorna `true` si el agente del usuario corresponde a un sistema operativo Windows. |
-| `Agent::detect()->isWindowsPhone()` | Retorna `true` si el agente del usuario corresponde a un sistema operativo Windows Phone. |
-| `Agent::detect()->isIpod()` | Retorna `true` si el agente del usuario corresponde a un iPod. |
-| `Agent::detect()->isIpad()` | Retorna `true` si el agente del usuario corresponde a un iPad. |
-| `Agent::detect()->isIMac()` | Retorna `true` si el agente del usuario corresponde a un iMac. |
-| `Agent::detect()->clientOS()` | Retorna el nombre del sistema operativo del cliente actual. |
-| `Agent::detect()->browser()` | Retorna información sobre el navegador utilizado por el cliente (Nombre, Versión y Plataforma).|
-| `Agent::detect()->remoteAddress()` | Retorna la IP en uso en la conexión al sistema. |
-| `Agent::detect()->remotePort()` | Retorna el puerto en uso en la conexión al sistema. |
+| - | - |
+| `PhpRunTime::set($option, $value)` | Establece el valor de una opción de configuración de PHP en tiempo de ejecución utilizando `ini_set()`. |
+| `PhpRunTime::get($option)` | Obtiene el valor actual de una opción de configuración de PHP. Si la opción no está configurada o no se encuentra, retorna `null`. |
+| `PhpRunTime::restore($option)` | Restaura el valor de una opción de configuración de PHP a su valor predeterminado. Retorna `true` si la restauración es exitosa, o `false` en caso contrario. |
+| `PhpRunTime::restoreAll()` | Restaura todas las opciones de configuración de PHP a sus valores predeterminados. Retorna `true` si todas las restauraciones son exitosas, o `false` si no. |
+| `PhpRunTime::isOptionSet($option)` | Verifica si una opción de configuración está establecida y tiene un valor no vacío. Retorna `true` si la opción está configurada, o `false` si no. |
+| `PhpRunTime::doesOptionExist($option)` | Verifica si una opción de configuración existe en el archivo `php.ini`. Retorna `true` si la opción existe, o `false` si no. |
 
-Con esta potente herramienta, podrás obtener datos de la conexión en tu aplicación y ofrecer diferentes experiencias dependiendo del sistema, navegador o dispositivo que utilice el usuario al conectarse.
+### Ejemplos de Uso
 
-## Uso
+#### Establecer una Opción de Configuración
 
-¿Quieres validar si es una conexión móvil?
 ```php
-use Rmunate\Server\Agent;
+use Rmunate\Server\PhpRunTime;
 
-if (Agent::detect()->isMobile()) {
-    // Es conexión móvil
+// Establecer la opción "display_errors" en "On"
+PhpRunTime::set('display_errors', 'On');
+
+// Verificar si la opción está configurada y tiene un valor no vacío
+if (PhpRunTime::isOptionSet('display_errors')) {
+    // 'La opción "display_errors" está activada.';
 } else {
-    // Es conexión de escritorio
+    // 'La opción "display_errors" no está configurada.';
 }
 ```
 
-¿Necesitas conocer los datos del navegador?
-```php
-use Rmunate\Server\Agent;
+#### Obtener el Valor de una Opción de Configuración
 
-$browser = Agent::detect()->browser();
-// array:3 [▼
-//   "name" => "Apple Safari"
-//   "version" => "537.36"
-//   "platform" => "Macintosh"
-// ]
+```php
+use Rmunate\Server\PhpRunTime;
+
+// Obtener el valor actual de la opción "max_execution_time"
+$maxExecutionTime = PhpRunTime::get('max_execution_time');
+
+if ($maxExecutionTime !== null) {
+    // "El valor actual de 'max_execution_time' es: $maxExecutionTime segundos.";
+} else {
+    // "La opción 'max_execution_time' no está configurada.";
+}
 ```
+
+#### Restaurar una Opción de Configuración
+
+```php
+use Rmunate\Server\PhpRunTime;
+
+// Establecer temporalmente la opción "memory_limit" en "256M"
+PhpRunTime::set('memory_limit', '256M');
+
+// Restaurar la opción "memory_limit" a su valor predeterminado
+PhpRunTime::restore('memory_limit');
+
+// Verificar si la opción está configurada y tiene un valor no vacío
+if (PhpRunTime::isOptionSet('memory_limit')) {
+    // 'La opción "memory_limit" está configurada.';
+} else {
+    // 'La opción "memory_limit" no está configurada.';
+}
+```
+
+#### Restaurar Todas las Opciones de Configuración
+
+```php
+use Rmunate\Server\PhpRunTime;
+
+// Establecer temporalmente algunas opciones de configuración
+PhpRunTime::set('display_errors', 'On');
+PhpRunTime::set('error_reporting', E_ALL);
+
+// Restaurar todas las opciones a sus valores predeterminados
+PhpRunTime::restoreAll();
+
+// Verificar si las opciones están configuradas y tienen valores no vacíos
+if (PhpRunTime::isOptionSet('display_errors') || PhpRunTime::isOptionSet('error_reporting')) {
+    // 'Algunas opciones no pudieron ser restauradas.';
+} else {
+    // 'Todas las opciones fueron restauradas correctamente.';
+}
+```
+
+### Aclaraciones
+
+- Los cambios realizados con el método `set()` son válidos solo durante la ejecución del script actual y no afectan al archivo `php.ini`. Para hacer cambios permanentes, es necesario editar el archivo `php.ini` manualmente.
+
+- Algunas opciones de configuración pueden estar deshabilitadas en entornos compartidos de alojamiento (shared hosting), lo que puede limitar la capacidad de cambiar ciertas configuraciones.
+
+- Es importante tener cuidado al modificar la configuración de PHP, ya que algunos cambios pueden afectar el rendimiento y la seguridad de las aplicaciones. Se recomienda consultar la documentación oficial de PHP para obtener información detallada sobre cada opción de configuración.
 
 ## Creador
 - 🇨🇴 Raúl Mauricio Uñate Castro

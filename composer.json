@@ -1,17 +1,17 @@
 {
-    "name": "grupoaltum/php-config-runtime",
+    "name": "rmunate/php-config-runtime",
     "description": "The PhpRunTime Library provides methods for managing PHP configuration at runtime. It allows you to set, get, and restore configuration options, as well as check their existence and status.",
     "keywords": [
         "laravel",
         "php",
         "agent"
     ],
-    "homepage": "https://github.com/rmunate/PHPInfoServer",
+    "homepage": "https://github.com/rmunate/PHPConfigRuntime",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Grupoaltum\\PhpConfigRuntime\\": "src/"
+            "Rmunate\\PhpConfigRuntime\\": "src/"
         }
     },
     "authors": [

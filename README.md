@@ -1,66 +1,110 @@
-# Agent Detection | Discover and Analyze Connection Agent Information
+# PhpRunTime: Fine-tune your PHP configuration on the Fly!
 
-The `Agent Detection` library offers a wide variety of methods that allow you to explore and analyze connection agent data in your application.
+The `PhpRunTime` Library provides methods for managing PHP configuration at runtime. It allows you to set, get, and restore configuration options, as well as check their existence and status.
 
-![LOGO](https://github.com/rmunate/PHPInfoServer/assets/91748598/f1ee8001-aa76-49c3-82ad-49014b28fd61)
+![RUNTIME_PHP](https://github.com/rmunate/PHPInfoServer/assets/91748598/873f40e0-9278-4a82-a50c-5baef7b7691a)
 
-## Table of Contents
+### Table of Contents
 1. [Available Methods](#available-methods)
-2. [Usage](#usage)
-3. [Creator](#creator)
-4. [License](#license)
+2. [Usage Examples](#usage-examples)
+   - [Set a Configuration Option](#set-a-configuration-option)
+   - [Get the Value of a Configuration Option](#get-the-value-of-a-configuration-option)
+   - [Restore a Configuration Option](#restore-a-configuration-option)
+   - [Restore All Configuration Options](#restore-all-configuration-options)
+3. [Clarifications](#clarifications)
+4. [Creator](#creator)
+5. [License](#license)
 
-## Introduction
-This simple utility library enables you to retrieve specific details about the connection agent, allowing you to enhance the user experience based on connection data. For example, if you detect a mobile connection, you can prompt the user to download the mobile app if your system has one. Additionally, you can provide a more tailored experience for Android users or differentiate options, menus, and other elements for desktop or mobile users.
-
-In essence, you have a world of possibilities at your fingertips.
-
-## Available Methods
+### Available Methods
 
 | Method | Description |
-| ------ | ----------- |
-| `Agent::get()` | Returns the current connection agent detected by the server. |
-| `Agent::detect()->isMobile()` | Checks if the agent comes from a mobile device. |
-| `Agent::detect()->isDesktop()` | Returns `true` if the user is accessing from a desktop device. |
-| `Agent::detect()->isIPhone()` | Returns `true` if the user's agent corresponds to an iPhone. |
-| `Agent::detect()->isMacintosh()` | Returns `true` if the user's agent corresponds to a Macintosh operating system. |
-| `Agent::detect()->isLinux()` | Returns `true` if the user's agent corresponds to a Linux operating system (PC or Android systems). |
-| `Agent::detect()->isWindows()` | Returns `true` if the user's agent corresponds to a Windows operating system. |
-| `Agent::detect()->isWindowsPhone()` | Returns `true` if the user's agent corresponds to a Windows Phone operating system. |
-| `Agent::detect()->isIpod()` | Returns `true` if the user's agent corresponds to an iPod. |
-| `Agent::detect()->isIpad()` | Returns `true` if the user's agent corresponds to an iPad. |
-| `Agent::detect()->isIMac()` | Returns `true` if the user's agent corresponds to an iMac. |
-| `Agent::detect()->clientOS()` | Returns the name of the current client's operating system. |
-| `Agent::detect()->browser()` | Returns information about the browser used by the client (Name, Version, and Platform). |
-| `Agent::detect()->remoteAddress()` | Returns the IP address in use in the connection to the system. |
-| `Agent::detect()->remotePort()` | Returns the port in use in the connection to the system. |
+| - | - |
+| `PhpRunTime::set($option, $value)` | Sets the value of a PHP configuration option at runtime using `ini_set()`. |
+| `PhpRunTime::get($option)` | Gets the current value of a PHP configuration option. If the option is not set or found, returns `null`. |
+| `PhpRunTime::restore($option)` | Restores a PHP configuration option to its default value. Returns `true` if the restoration is successful, or `false` otherwise. |
+| `PhpRunTime::restoreAll()` | Restores all PHP configuration options to their default values. Returns `true` if all restorations are successful, or `false` otherwise. |
+| `PhpRunTime::isOptionSet($option)` | Checks if a configuration option is set and has a non-empty value. Returns `true` if the option is set, or `false` otherwise. |
+| `PhpRunTime::doesOptionExist($option)` | Checks if a configuration option exists in the `php.ini` file. Returns `true` if the option exists, or `false` otherwise. |
 
-With this powerful tool, you can gather connection data in your application and offer different experiences based on the user's system, browser, or device when connecting.
+### Usage Examples
 
-## Usage
+#### Set a Configuration Option
 
-Want to check if it's a mobile connection?
 ```php
-use Rmunate\Server\Agent;
+use Rmunate\Server\PhpRunTime;
 
-if (Agent::detect()->isMobile()) {
-    // It's a mobile connection
+// Set the "display_errors" option to "On"
+PhpRunTime::set('display_errors', 'On');
+
+// Check if the option is set and has a non-empty value
+if (PhpRunTime::isOptionSet('display_errors')) {
+    // 'The "display_errors" option is enabled.';
 } else {
-    // It's a desktop connection
+    // 'The "display_errors" option is not set.';
 }
 ```
 
-Need to know the browser details?
-```php
-use Rmunate\Server\Agent;
+#### Get the Value of a Configuration Option
 
-$browser = Agent::detect()->browser();
-// array:3 [▼
-//   "name" => "Apple Safari"
-//   "version" => "537.36"
-//   "platform" => "Macintosh"
-// ]
+```php
+use Rmunate\Server\PhpRunTime;
+
+// Get the current value of the "max_execution_time" option
+$maxExecutionTime = PhpRunTime::get('max_execution_time');
+
+if ($maxExecutionTime !== null) {
+    // "The current value of 'max_execution_time' is: $maxExecutionTime seconds.";
+} else {
+    // "The 'max_execution_time' option is not set.";
+}
 ```
+
+#### Restore a Configuration Option
+
+```php
+use Rmunate\Server\PhpRunTime;
+
+// Temporarily set the "memory_limit" option to "256M"
+PhpRunTime::set('memory_limit', '256M');
+
+// Restore the "memory_limit" option to its default value
+PhpRunTime::restore('memory_limit');
+
+// Check if the option is set and has a non-empty value
+if (PhpRunTime::isOptionSet('memory_limit')) {
+    // 'The "memory_limit" option is set.';
+} else {
+    // 'The "memory_limit" option is not set.';
+}
+```
+
+#### Restore All Configuration Options
+
+```php
+use Rmunate\Server\PhpRunTime;
+
+// Temporarily set some configuration options
+PhpRunTime::set('display_errors', 'On');
+PhpRunTime::set('error_reporting', E_ALL);
+
+// Restore all options to their default values
+PhpRunTime::restoreAll();
+
+// Check if the options are set and have non-empty values
+if (PhpRunTime::isOptionSet('display_errors') || PhpRunTime::isOptionSet('error_reporting')) {
+    // 'Some options could not be restored.';
+} else {
+    // 'All options were successfully restored.';
+}
+```
+
+### Clarifications
+
+- Changes made using the `set()` method are only valid during the execution of the current script and do not affect the `php.ini` file. To make permanent changes, it's necessary to manually edit the `php.ini` file.
+
+- Some configuration options may be disabled in shared hosting environments, which may limit the ability to change certain configurations.
+
+- It's important to be cautious when modifying PHP configuration, as some changes can affect the performance and security of applications. It's recommended to consult the official PHP documentation for detailed information on each configuration option.
 
 ## Creator
 - 🇨🇴 Raúl Mauricio Uñate Castro

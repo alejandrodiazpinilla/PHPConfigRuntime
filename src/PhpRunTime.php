@@ -1,10 +1,10 @@
 <?php
 
-namespace Grupoaltum\PhpConfigRuntime;
+namespace Rmunate\PhpConfigRuntime;
 
-use Grupoaltum\PhpConfigRuntime\Bases\BasePhpRunTime;
-use Grupoaltum\PhpConfigRuntime\Traits\Ini;
-use Grupoaltum\PhpConfigRuntime\Traits\Utilities;
+use Rmunate\PhpConfigRuntime\Traits\Ini;
+use Rmunate\PhpConfigRuntime\Traits\Utilities;
+use Rmunate\PhpConfigRuntime\Bases\BasePhpRunTime;
 
 class PhpRunTime extends BasePhpRunTime
 {

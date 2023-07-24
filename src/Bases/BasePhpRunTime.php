@@ -1,6 +1,6 @@
 <?php
 
-namespace Grupoaltum\PhpConfigRuntime\Bases;
+namespace Rmunate\PhpConfigRuntime\Bases;
 
 abstract class BasePhpRunTime
 {
