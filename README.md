@@ -4,18 +4,26 @@ The `PhpRunTime` Library provides methods for managing PHP configuration at runt
 
 ![RUNTIME_PHP](https://github.com/rmunate/PHPInfoServer/assets/91748598/873f40e0-9278-4a82-a50c-5baef7b7691a)
 
-### Table of Contents
-1. [Available Methods](#available-methods)
-2. [Usage Examples](#usage-examples)
+## Table of Contents
+1. [Installation](#installation)
+2. [Available Methods](#available-methods)
+3. [Usage Examples](#usage-examples)
    - [Set a Configuration Option](#set-a-configuration-option)
    - [Get the Value of a Configuration Option](#get-the-value-of-a-configuration-option)
    - [Restore a Configuration Option](#restore-a-configuration-option)
    - [Restore All Configuration Options](#restore-all-configuration-options)
-3. [Clarifications](#clarifications)
-4. [Creator](#creator)
-5. [License](#license)
+4. [Clarifications](#clarifications)
+5. [Creator](#creator)
+6. [License](#license)
 
-### Available Methods
+## Installation
+To install the package via Composer, run the following command:
+
+```shell
+composer require rmunate/php-config-runtime
+```
+
+## Available Methods
 
 | Method | Description |
 | - | - |
@@ -26,7 +34,7 @@ The `PhpRunTime` Library provides methods for managing PHP configuration at runt
 | `PhpRunTime::isOptionSet($option)` | Checks if a configuration option is set and has a non-empty value. Returns `true` if the option is set, or `false` otherwise. |
 | `PhpRunTime::doesOptionExist($option)` | Checks if a configuration option exists in the `php.ini` file. Returns `true` if the option exists, or `false` otherwise. |
 
-### Usage Examples
+## Usage Examples
 
 #### Set a Configuration Option
 
@@ -98,7 +106,7 @@ if (PhpRunTime::isOptionSet('display_errors') || PhpRunTime::isOptionSet('error_
 }
 ```
 
-### Clarifications
+## Clarifications
 
 - Changes made using the `set()` method are only valid during the execution of the current script and do not affect the `php.ini` file. To make permanent changes, it's necessary to manually edit the `php.ini` file.
 
