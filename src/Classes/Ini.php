@@ -1,8 +1,8 @@
 <?php
 
-namespace Rmunate\PhpConfigRuntime\Traits;
+namespace Rmunate\PhpConfigRuntime\Classes;
 
-trait Ini
+class Ini
 {
     /**
      * Sets a configuration option at runtime.
@@ -11,7 +11,7 @@ trait Ini
      * @param mixed $value The value to set for the option.
      * @return bool Returns true if the option was set successfully, false otherwise.
      */
-    public function iniSet($option, $value)
+    public static function set($option, $value)
     {
         return ini_set($option, $value) !== false;
     }
@@ -22,7 +22,7 @@ trait Ini
      * @param string $option The name of the option to retrieve.
      * @return string|false Returns the value of the configuration option, or false on failure.
      */
-    public function iniGet($option)
+    public static function get($option)
     {
         return ini_get($option);
     }
@@ -33,7 +33,7 @@ trait Ini
      * @param string $option The name of the option to restore.
      * @return bool Returns true if the option was restored successfully, false otherwise.
      */
-    public function iniRestore($option)
+    public static function restore($option)
     {
         return ini_restore($option) !== false;
     }
@@ -43,7 +43,7 @@ trait Ini
      *
      * @return array Returns an associative array containing all the current configuration options and their values.
      */
-    public function iniGetAll()
+    public static function getAll()
     {
         return ini_get_all();
     }

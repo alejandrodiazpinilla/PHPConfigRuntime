@@ -2,15 +2,12 @@
 
 namespace Rmunate\PhpConfigRuntime;
 
-use Rmunate\PhpConfigRuntime\Traits\Ini;
-use Rmunate\PhpConfigRuntime\Traits\Utilities;
 use Rmunate\PhpConfigRuntime\Bases\BasePhpRunTime;
+use Rmunate\PhpConfigRuntime\Classes\Ini;
+use Rmunate\PhpConfigRuntime\Classes\Utilities;
 
 class PhpRunTime extends BasePhpRunTime
 {
-    use Ini;
-    use Utilities;
-
     /**
      * Set a PHP configuration option using ini_set().
      *
@@ -20,10 +17,10 @@ class PhpRunTime extends BasePhpRunTime
      */
     public static function set(string $option, $value): bool
     {
-        if (!$this->isValid($option)) {
+        if (!Utilities::isValid($option)) {
             return false;
         }
-        return $this->iniSet($option, $value);
+        return Ini::set($option, $value);
     }
 
     /**
@@ -34,10 +31,10 @@ class PhpRunTime extends BasePhpRunTime
      */
     public static function get(string $option)
     {
-        if (!$this->isValid($option)) {
+        if (!Utilities::isValid($option)) {
             return null;
         }
-        return $this->iniGet($option);
+        return Ini::get($option);
     }
 
     /**
@@ -48,10 +45,10 @@ class PhpRunTime extends BasePhpRunTime
      */
     public static function restore(string $option): bool
     {
-        if (!$this->isValid($option)) {
+        if (!Utilities::isValid($option)) {
             return false;
         }
-        return $this->iniRestore($option);
+        return Ini::restore($option);
     }
 
     /**
@@ -61,11 +58,11 @@ class PhpRunTime extends BasePhpRunTime
      */
     public static function restoreAll(): bool
     {
-        $modifiedOptions = $this->iniGetAll();
-        $success = true;
+        $modifiedOptions = Ini::getAll();
+        $success = false;
         foreach ($modifiedOptions as $optionName => $optionValue) {
-            if ($this->iniRestore($optionName)) {
-                $success = false;
+            if (Ini::restore($optionName)) {
+                $success = true;
             }
         }
         return $success;
@@ -79,10 +76,10 @@ class PhpRunTime extends BasePhpRunTime
      */
     public static function isOptionSet(string $option): bool
     {
-        if (!$this->isValid($option)) {
+        if (!Utilities::isValid($option)) {
             return false;
         }
-        $value = $this->iniGet($option);
+        $value = Ini::get($option);
         return $value !== false && $value !== '';
     }
 
@@ -94,11 +91,11 @@ class PhpRunTime extends BasePhpRunTime
      */
     public static function doesOptionExist(string $option): bool
     {
-        if (!$this->isValid($option)) {
+        if (!Utilities::isValid($option)) {
             return false;
         }
 
         // Check if the option exists in php.ini.
-        return $this->iniGet($option) !== false;
+        return Ini::get($option) !== false;
     }
 }
