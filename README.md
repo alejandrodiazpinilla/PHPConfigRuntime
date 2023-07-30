@@ -1,4 +1,7 @@
 # PhpRunTime: Fine-tune your PHP configuration on the Fly!
+⚙️ This library is compatible with Laravel versions 8.0 and above ⚙️
+
+[![Laravel 8.0+](https://img.shields.io/badge/Laravel-8.0%2B-orange.svg)](https://laravel.com)
 
 The `PhpRunTime` Library provides methods for managing PHP configuration at runtime. It allows you to set, get, and restore configuration options, as well as check their existence and status.
 
