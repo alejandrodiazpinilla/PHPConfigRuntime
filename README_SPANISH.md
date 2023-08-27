@@ -9,6 +9,8 @@ La biblioteca `PhpRunTime` proporciona métodos para gestionar la configuración
 
 ![RUNTIME_PHP](https://github.com/rmunate/PHPInfoServer/assets/91748598/873f40e0-9278-4a82-a50c-5baef7b7691a)
 
+📖 [**DOCUMENTACIÓN EN INGLÉS**](README.md) 📖
+
 ## Tabla de contenidos
 1. [Instalación](#instalación)
 2. [Métodos disponibles](#métodos-disponibles)
@@ -124,4 +126,10 @@ if (PhpRunTime::isOptionSet('display_errors') || PhpRunTime::isOptionSet('error_
 - Email: raulmauriciounate@gmail.com
 
 ## Licencia
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+Este proyecto se encuentra bajo la [Licencia MIT](https://choosealicense.com/licenses/mit/).
+
+🌟 ¡Apoya Mis Proyectos! 🚀
+
+¡Realiza las contribuciones que veas necesarias, el código es totalmente tuyo. Juntos podemos hacer cosas asombrosas y mejorar el mundo del desarrollo. Tu apoyo es invaluable. ✨
+
+Si tienes ideas, sugerencias o simplemente deseas colaborar, ¡estamos abiertos a todo! ¡Únete a nuestra comunidad y forma parte de nuestro viaje hacia el éxito! 🌐👩‍💻👨‍💻

@@ -9,6 +9,8 @@ The `PhpRunTime` Library provides methods for managing PHP configuration at runt
 
 ![RUNTIME_PHP](https://github.com/rmunate/PHPInfoServer/assets/91748598/873f40e0-9278-4a82-a50c-5baef7b7691a)
 
+📖 [**DOCUMENTACIÓN EN ESPAÑOL**](README_SPANISH.md) 📖
+
 ## Table of Contents
 1. [Installation](#installation)
 2. [Available Methods](#available-methods)
@@ -124,4 +126,10 @@ if (PhpRunTime::isOptionSet('display_errors') || PhpRunTime::isOptionSet('error_
 - Email: raulmauriciounate@gmail.com
 
 ## License
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+This project is under the [MIT License](https://choosealicense.com/licenses/mit/).
+
+🌟 Support My Projects! 🚀
+
+Make any contributions you see fit; the code is entirely yours. Together, we can do amazing things and improve the world of development. Your support is invaluable. ✨
+
+If you have ideas, suggestions, or just want to collaborate, we are open to everything! Join our community and be part of our journey to success! 🌐👩‍💻👨‍💻
