@@ -7,7 +7,7 @@
 
 La biblioteca `PhpRunTime` proporciona métodos para gestionar la configuración de PHP en tiempo de ejecución. Permite establecer, obtener y restaurar opciones de configuración, así como verificar su existencia y estado.
 
-![RUNTIME_PHP](https://github.com/rmunate/PHPInfoServer/assets/91748598/873f40e0-9278-4a82-a50c-5baef7b7691a)
+![logo-php-config-runtime](https://github.com/alejandrodiazpinilla/PHPConfigRuntime/assets/51100789/6d922f03-b851-473e-82c4-0923e3e6e4cb)
 
 📖 [**DOCUMENTACIÓN EN INGLÉS**](README.md) 📖
 
